@@ -2,22 +2,21 @@ window.addEventListener('DOMContentLoaded', function () {
   const zoekLiedjesButton = document.getElementById('zoekLiedjes');
   const loadingOverlay = document.getElementById('loadingOverlay');
 
-  // Verberg de overlay zodra de pagina geladen is
+  // Loading overlay verbergen na laden van pagina
   loadingOverlay.style.display = 'none';
 
-  // Knop om te zoeken naar liedjes
   zoekLiedjesButton.addEventListener('click', searchSongs);
 
-  // Hulpfunctie om te wachten (in milliseconden)
+  // Functie om te wachten
   function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // 🔍 Zoek liedjes via de iTunes API
+  // Zoek liedjes via de iTunes API
   async function searchSongs() {
     const query = document.getElementById('searchInput').value;
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = ''; // Verwijder oude resultaten
+    resultsDiv.innerHTML = '';
 
     if (!query.trim()) {
       // Als de invoer leeg is
@@ -70,7 +69,7 @@ window.addEventListener('DOMContentLoaded', function () {
             lyricsDiv.style.display = 'none';
             button.textContent = "Toon lyrics";
           } else {
-            // Als de lyrics nog niet geladen zijn, haal ze op
+            // Haal lyrics op indien ze nog niet zijn geladen
             if (lyricsDiv.textContent.trim() === "") {
               lyricsDiv.textContent = "Lyrics laden...";
               try {
