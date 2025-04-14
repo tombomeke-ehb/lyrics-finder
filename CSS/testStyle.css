@@ -14,10 +14,17 @@ img {
   height: auto;
 }
 
+.logo-container{
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
 .navbar {
   display: flex;
   border-bottom: white 3px solid;
   padding-bottom: 2px;
+  height: 105px;
 }
 
 .navbar ul {
@@ -25,6 +32,9 @@ img {
   list-style: none;
   align-items: center;
   padding-left: 5px;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .navbar a{
@@ -50,10 +60,13 @@ img {
   padding: 20px;
 }
 
+.navbar li:last-child {
+  margin-left: auto;
+}
+
 .navbar .menu {
   width: 50px;
   height: 50px;
-  margin-right: 10px;
   transition: transform 0.2s ease;
 }
 
