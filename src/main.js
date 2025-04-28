@@ -21,6 +21,7 @@ const home = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
+                <li id="settings"><a class="settings"><img src="./public/images/gear-icon"> Settings</a>
               </ul>
             </div>
           </div>
@@ -97,4 +98,3 @@ const router = new Router({
   '/savedsongs': savedsongs,
   '/404': notFound
 })
-

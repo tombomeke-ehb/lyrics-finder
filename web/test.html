@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrics Finder</title>
+  <link rel="stylesheet" href="../CSS/testStyle.css">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+</head>
+<body>
+  <div>
+    <nav class="navbar">
+      <div class="logo-container"><img src="../images/logo.png" alt="Logo" class="logo" size="100" width="100" height="100"></div>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../web/test.html" class="active">Zoek Liedjes</a></li>
+        <li>
+          <div id="menuContainer" class="">
+            <img id="burgerIcon" class="menu" src="../images/menu-burger-lightmode.svg" alt="Open menu">
+            <div id="burgerNav" class="">
+              <img id="closeIcon" src="../images/close-button-white.svg" alt="Sluit menu">
+              <h1>Menu</h1>
+              <ul class="burgernav">
+                <li><a href="saved.html">Saved Songs</a></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="input-container">
+    <h1>🎵 Lyrics Finder</h1>
+
+    <input type="text" id="searchInput" placeholder="Typ artiest of liedtitel..." />
+    <button id="zoekLiedjes">Zoek liedjes</button>
+
+    <div id="results"></div>
+
+  </div>
+
+  <div id="burgerNav">
+    <h1>Menu</h1>
+  </div>
+
+  <div id="loadingOverlay">
+    <div class="loader"></div>
+  </div>
+
+  <script src="../JS/testScript.mjs" type="module"></script>
+</body>
+</html>
