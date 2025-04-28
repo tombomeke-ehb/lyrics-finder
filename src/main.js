@@ -21,7 +21,7 @@ const home = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a class="settings"><img src="./public/images/gear-icon"> Settings</a>
+                <li id="settings"><a class="settings"><img src="./public/images/gear-icon.svg"> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -51,7 +51,7 @@ const findlyrics = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li></li>
+                <li id="settings"><a class="settings"><img id="gear-icon" src="./public/images/gear-icon.svg"> Settings</a></li>
               </ul>
             </div>
           </div>
