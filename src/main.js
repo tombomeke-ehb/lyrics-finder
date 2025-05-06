@@ -2,26 +2,30 @@ import Router from './JS/router.mjs'
 import { setupHomePage } from './JS/indexScript.mjs';
 import { setupFindLyricsPage } from './JS/testScript.mjs';
 import './CSS/style.css'
+import logo from '/public/images/logo.png';
+import burgerIcon from '/public/images/menu-burger-lightmode.svg';
+import closeIcon from '/public/images/close-button-white.svg';
+import gearIcon from '/public/images/gear-icon.svg';
 
 const home = (container) => {
   container.innerHTML = `
   <div>
     <nav class="navbar">
       <div class="logo-container">
-        <img src="./public/images/logo.png" alt="Logo" class="logo" size="100" width="100" height="100">
+        <img src="${logo}" alt="Logo" class="logo" size="100" width="100" height="100">
       </div>
       <ul>
         <li><a href="#/" class="active">Home</a></li>
         <li><a href="#/findlyrics">Zoek Liedjes</a></li>
         <li>
           <div id="menuContainer">
-            <img id="burgerIcon" class="menu" src="./public/images/menu-burger-lightmode.svg" alt="Open menu">
+            <img id="burgerIcon" class="menu" src="${burgerIcon}" alt="Open menu">
             <div id="burgerNav">
-              <img id="closeIcon" src="./public/images/close-button-white.svg" alt="Sluit menu">
+              <img id="closeIcon" src="${closeIcon}" alt="Sluit menu">
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a class="settings"><img src="./public/images/gear-icon.svg"> Settings</a></li>
+                <li id="settings"><a class="settings"><img src="${gearIcon}"> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -39,19 +43,19 @@ const findlyrics = (container) => {
   container.innerHTML = `
   <div>
     <nav class="navbar">
-      <div class="logo-container"><img src="./public/images/logo.png" alt="Logo" class="logo" size="100" width="100" height="100"></div>
+      <div class="logo-container"><img src="${logo}" alt="Logo" class="logo" size="100" width="100" height="100"></div>
       <ul>
         <li><a href="#/">Home</a></li>
         <li><a href="#" class="active">Zoek Liedjes</a></li>
         <li>
           <div id="menuContainer" class="">
-            <img id="burgerIcon" class="menu" src="./public/images/menu-burger-lightmode.svg" alt="Open menu">
+            <img id="burgerIcon" class="menu" src="${burgerIcon}" alt="Open menu">
             <div id="burgerNav" class="">
-              <img id="closeIcon" src="./public/images/close-button-white.svg" alt="Sluit menu">
+              <img id="closeIcon" src="${closeIcon}" alt="Sluit menu">
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a class="settings"><img id="gear-icon" src="./public/images/gear-icon.svg"> Settings</a></li>
+                <li id="settings"><a class="settings"><img id="gear-icon" src="${gearIcon}"> Settings</a></li>
               </ul>
             </div>
           </div>
