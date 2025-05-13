@@ -5,12 +5,12 @@ import './CSS/style.css'
 
 // Images
 
-import logo from './images/logo.png'
-import logoWhite from './images/logo-white.png'
-import menuBurgerLightMode from './images/menu-burger-lightmode.svg'
-import menuBurgerDarkMode from './images/menu-burger-white.svg'
-import closeIconLight from './images/close-button-white.svg'
-import gearIconLight from './images/gear-icon-light-mode.svg'
+const logo = './images/logo.png'
+const logoWhite = './images/logo-white.png'
+const menuBurgerLightMode = './images/menu-burger-lightmode.svg'
+const menuBurgerDarkMode = '.c/images/menu-burger-darkmode.svg'
+const closeIconLight = './images/close-button-white.svg'
+const gearIconLight = './images/gear-icon-light-mode.svg'
 
 const home = (container) => {
   container.innerHTML = `
