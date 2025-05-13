@@ -3,7 +3,7 @@
 }
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f1dc;
+  background-color: #181818;
   padding: 0;
   margin: 0;
 }
@@ -43,16 +43,16 @@ img {
   font-weight: bold;
   font-size: 1.5rem;
   padding: 10px;
-  background-color: #ca9770;
+  background-color: #313131;
   border-radius: 20px;
   color: white;
   border: white 3px solid;
   transition: transform 0.2s ease;
-  box-shadow: 8px 8px 8px rgba(190, 138, 98, 0.8);
+  box-shadow: 8px 8px 8px rgba(95, 95, 95, 0.8);
 }
 
 .navbar a:hover {
-  background-color: #e9ae81;
+  background-color: #4d4d4d;
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -78,7 +78,7 @@ img {
 
 h1,
 h3 {
-  color: #333;
+  color: white;
 }
 
 #logo {
@@ -97,7 +97,7 @@ h3 {
 .navbar a.active {
   font-weight: bold;
   text-decoration: underline;
-  box-shadow: 8px 8px 8px rgba(190, 138, 98, 0.8);
+  box-shadow: 8px 8px 8px rgba(95, 95, 95, 0.8);
 }
 
 #loadingOverlay {
@@ -124,7 +124,7 @@ h3 {
 
 /*Extra Burger Menu*/
 #burgerNav {
-  background-color: #e9e2cf;
+  background-color: rgb(58, 58, 58);
   width: 250px;
   height: 100vh;
   position: fixed;
@@ -227,7 +227,7 @@ h3 {
   padding: 10px 20px;
   margin: 0;
   text-align: center;
-  background-color: #ca9770;
+  background-color: #313131;;
   color: white;
   border-radius: 20px;
   text-decoration: none;
@@ -259,6 +259,16 @@ h3 {
 
 .hidden {
   display: none;
+}
+
+/* Results */
+
+p{
+  color: white;
+}
+
+.lyrics{
+  color: white;
 }
 
 @keyframes spin {
