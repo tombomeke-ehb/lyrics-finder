@@ -7,6 +7,7 @@ import './CSS/style.css'
 
 const logo = './images/logo.png'
 const logoWhite = './images/logo-white.png'
+const favicon = './images/favicon1.png'
 const menuBurgerLightMode = './images/menu-burger-lightmode.svg'
 const menuBurgerDarkMode = '.c/images/menu-burger-darkmode.svg'
 const closeIconLight = './images/close-button-white.svg'
@@ -14,6 +15,7 @@ const gearIconLight = './images/gear-icon-light-mode.svg'
 
 const home = (container) => {
   container.innerHTML = `
+  <link rel="icon" type="image/png" href="${favicon}" />
   <div>
     <nav class="navbar">
       <div class="logo-container">
