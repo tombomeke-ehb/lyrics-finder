@@ -284,4 +284,36 @@ p{
 
 }
 
+@media screen and (min-width: 400px){
+  #menuContainer.open {
+    width: 210px;
+  }
+
+  #burgerNav h1{
+    padding-left: 150px;
+  }
+
+  .navbar ul {
+    width: 95%;
+  }
+
+  .navbar a{
+    padding: 12px;
+    margin-left: 10px;
+  }
+
+  .navbar a:first-child{
+    margin-left: 5px;
+  }
+
+  .navbar .burgernav li {
+    margin-left: 80px;
+  }
+
+  .burgernav li {
+    width: 259px;
+  }
+  
+}
+
 }
