@@ -440,14 +440,23 @@ p{
 }
 
 
+@media screen and (min-width: 660px){
   #burgerNav {
   width: 250px;
-  right: -250px;
+  height: 100vh;
 }
 
 #burgerNav.active {
-  width: 100%;
-}
+    width: 250px;
 }
 
+#menuContainer.open {
+  width: 50px;
+}
+#burgerNav h1{
+  padding-left: 75px;
+}
+.navbar .burgernav li {
+  margin-left: 50px;
+}
 }
