@@ -264,10 +264,14 @@ p{
   color: white;
 }
 
+/* Keyframes */
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Media Queries */
 
 @media screen and (min-width: 370px){
   #menuContainer.open {
@@ -433,7 +437,7 @@ p{
   #burgerNav h1{
     padding-left: 290px;
   }
-  
+
   .navbar .burgernav li {
     margin-left: 180px;
   }
