@@ -268,3 +268,20 @@ p{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media screen and (min-width: 370px){
+  #menuContainer.open {
+    width: 175px;
+  }
+
+  .navbar ul {
+    width: 100%;
+  }
+
+  .navbar .burgernav li {
+    margin-left: 60px;
+  }
+
+}
+
+}
