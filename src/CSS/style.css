@@ -425,6 +425,21 @@ p{
   }
 }
 
+@media screen and (min-width: 640px){
+  #menuContainer.open {
+    width: 440px;
+  }
+
+  #burgerNav h1{
+    padding-left: 290px;
+  }
+  
+  .navbar .burgernav li {
+    margin-left: 180px;
+  }
+}
+
+
   #burgerNav {
   width: 250px;
   right: -250px;
