@@ -388,6 +388,16 @@ p{
 }
 @media screen and (min-width: 501px){
   #burgerNav {
+    width: 250px;
+    right: -250px;
+  }
+
+  #burgerNav.active {
+    width: 100%;
+  }
+}
+
+  #burgerNav {
   width: 250px;
   right: -250px;
 }
