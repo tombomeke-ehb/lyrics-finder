@@ -236,6 +236,12 @@ h3 {
   padding-right: 10px;
 }
 
+/* Error message */
+
+.searchError.error { background: #ffdddd; color: #a00; border: 2px solid #a00; }
+.searchError.warning { background: #fff5cc; color: #b38f00; border: 2px solid #b38f00; }
+.searchError.info { background: #d9edf7; color: #31708f; border: 2px solid #31708f; }
+
 #searchError {
   display: block;
   position: fixed;
@@ -264,11 +270,127 @@ p{
   color: white;
 }
 
+/* Settings */
+.input-container label,
+.input-container span,
+.input-container h1 {
+  color: white;
+}
+
+
 /* Keyframes */
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Disable Animation */
+.no-animation * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* LIGHT MODE OVERRIDES */
+
+body.light-mode {
+  background-color: #fff !important;
+  color: #181818 !important;
+}
+
+body.light-mode h1,
+body.light-mode h3,
+body.light-mode p,
+body.light-mode label,
+body.light-mode span,
+body.light-mode select,
+body.light-mode button,
+body.light-mode .lyrics {
+  color: #181818 !important;
+}
+
+body.light-mode .input-container {
+  background: #f8f8f8;
+}
+
+body.light-mode .navbar {
+  border-bottom: 3px solid #181818 !important;
+  background: #f8f8f8;
+}
+
+body.light-mode .navbar a,
+body.light-mode .burgernav a {
+  background-color: #bdbdbd !important;
+  color: #181818 !important;
+  border: 3px solid #181818 !important;
+  box-shadow: 8px 8px 8px rgba(143, 143, 143, 0.8) !important;
+}
+
+body.light-mode .navbar a:hover,
+body.light-mode .burgernav a:hover {
+  background-color: #d1d1d1 !important;
+}
+
+body.light-mode .navbar a.active {
+  box-shadow: 8px 8px 8px rgba(121, 121, 121, 0.8) !important;
+}
+
+body.light-mode #burgerNav {
+  background-color: #dadada !important;
+  border-left: 3px solid #181818 !important;
+}
+
+body.light-mode #burgerNav h1 {
+  color: #181818 !important;
+}
+
+body.light-mode #searchError {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  color: #fff !important;
+  border: 2px solid #181818 !important;
+}
+
+body.light-mode .searchError.error { background: #ffdddd !important; color: #a00 !important; border: 2px solid #a00 !important; }
+body.light-mode .searchError.warning { background: #fff5cc !important; color: #b38f00 !important; border: 2px solid #b38f00 !important; }
+body.light-mode .searchError.info { background: #d9edf7 !important; color: #31708f !important; border: 2px solid #31708f !important; }
+
+body.light-mode .song {
+  background: #f8f8f8 !important;
+  color: #181818 !important;
+  border-radius: 12px;
+}
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode button {
+  background: #fff !important;
+  color: #181818 !important;
+  border-color: #181818 !important;
+}
+
+body.light-mode #loadingOverlay {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.light-mode .loader {
+  border: 8px solid #181818 !important;
+  border-top: 8px solid #e5e5e5 !important;
+}
+
+body.light-mode .lyrics {
+  color: #181818 !important;
+}
+
+/* Burger menu icons */
+body.light-mode #burgerIcon,
+body.light-mode #closeIcon {
+  filter: invert(1) grayscale(1) brightness(0.6);
+}
+
+/* Box-shadow aanpassen voor light mode */
+body.light-mode .navbar a,
+body.light-mode .burgernav a {
+  box-shadow: 8px 8px 8px rgba(121, 121, 121, 0.8) !important;
 }
 
 /* Media Queries */
