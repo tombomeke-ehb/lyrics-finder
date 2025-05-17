@@ -270,6 +270,38 @@ p{
   color: white;
 }
 
+.result-div{
+  background-color: #3a3a3a;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+.result-div:hover{
+  background-color: #434343;
+}
+
+#searchInput{
+  border-radius: 20px;
+  padding: 12px;
+  background-color: #4d4d4d;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+#searchInput:focus::placeholder{
+  color: transparent
+}
+
+#searchInput::placeholder{
+  color: white;
+  transition: color 0.3 ease;
+}
+
 /* Settings */
 .input-container label,
 .input-container span,

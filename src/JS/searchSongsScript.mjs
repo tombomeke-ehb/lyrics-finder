@@ -147,6 +147,7 @@ export function setupFindLyricsPage() {
     const rd = new Date(releaseDate).toLocaleDateString('nl-BE');
 
     div.innerHTML = `
+    <div class="result-div">
       <img src="${artworkUrl100}" alt="Album art">
       <h3>${trackName}</h3>
       <p><strong>Artiest:</strong> ${artistName}</p>
@@ -156,6 +157,7 @@ export function setupFindLyricsPage() {
       <audio class="preview" controls src="${previewUrl}"></audio>
       <button class="toon-lyrics">Toon lyrics</button>
       <div class="lyrics" style="display:none;"></div>
+    </div>
     `;
 
     const btn = div.querySelector('.toon-lyrics');
