@@ -149,52 +149,59 @@ const savedsongs = (container) => {
 
 const settings = (container) => {
   container.innerHTML = `
-  <div>
-    <nav class="navbar">
-      <div class="logo-container">
-        <img src="${logo}" alt="Logo" class="logo" size="100" width="100" height="100">
-      </div>
-      <ul>
-        <li><a href="#/">Home</a></li>
-        <li><a href="#/findlyrics">Zoek Liedjes</a></li>
-        <li>
-          <div id="menuContainer">
-            <img id="burgerIcon" class="menu" src="${menuBurgerLightMode}" alt="Open menu">
-            <div id="burgerNav">
-              <img id="closeIcon" src="${closeIconLight}" alt="Sluit menu">
-              <h1>Menu</h1>
-              <ul class="burgernav">
-                <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a href="#/settings" class="settings active"><img src="${gearIconLight}"> Settings</a></li>
-              </ul>
+    <div>
+      <nav class="navbar">
+        <div class="logo-container">
+          <img src="${logo}" alt="Logo" class="logo" width="100" height="100">
+        </div>
+        <ul>
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/findlyrics">Zoek Liedjes</a></li>
+          <li>
+            <div id="menuContainer">
+              <img id="burgerIcon" class="menu" src="${menuBurgerLightMode}" alt="Open menu">
+              <div id="burgerNav">
+                <img id="closeIcon" src="${closeIconLight}" alt="Sluit menu">
+                <h1>Menu</h1>
+                <ul class="burgernav">
+                  <li><a href="#/savedsongs">Saved Songs</a></li>
+                  <li id="settings"><a href="#/settings" class="settings active"><img src="${gearIconLight}"> Settings</a></li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </nav>
-    <div class="input-container">
-      <h1>Settings</h1>
-      <label>
-        🌗 <span>Dark mode</span>
-        <input type="checkbox" id="theme-toggle">
-      </label>
-      <br>
-      <label>
-        🎞️ <span>Animaties aan/uit</span>
-        <input type="checkbox" id="animation-toggle">
-      </label>
-      <br>
-      <label>
-        🎵 <span>Aantal resultaten</span>
-        <select id="song-limit">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-      </label>
-      <br>
-      <button id="clear-cache">🧹 Cache/data wissen</button>
-    </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="settings-panel">
+        <h1>Settings</h1>
+        <div class="setting-row">
+  <span>🌗</span>
+  <span id="theme-label" class="status-label">Dark mode</span>
+  <label class="switch">
+    <input type="checkbox" id="theme-toggle">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="setting-row">
+  <span>🎞️</span>
+  <span id="animation-label" class="status-label">Animaties aan</span>
+  <label class="switch">
+    <input type="checkbox" id="animation-toggle">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="setting-row">
+  <span>🎵 Aantal resultaten</span>
+  <select id="song-limit">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="25">25</option>
+  </select>
+</div>
+  <button id="clear-cache">🧹 Cache/data wissen</button>
+  </div>
+</div>
   `;
   setupSettingsPage();
 }
