@@ -1,4 +1,5 @@
 import { hideError } from './errorHandling.mjs';
+import { applySettingsFromStorage } from './themeUtils.mjs';
 
 export function PageLoad(){
     const loadingOverlay = document.getElementById('loadingOverlay');
@@ -13,4 +14,5 @@ export function PageLoad(){
     menuContainer && menuContainer.classList.remove('open');
     burgerIcon && burgerIcon.classList.remove('menu-open');
     hideError();
+    applySettingsFromStorage();
 };
