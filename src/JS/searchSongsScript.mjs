@@ -1,14 +1,13 @@
-// searchSongsScript.mjs
 import { hideError, showError, safeFetch } from './errorHandling.mjs';
 import { burgerMenu } from './burgerMenu.mjs';
 import { PageLoad } from './pageLoad.mjs';
 import { getSongLimit } from './settingsScript.mjs';
-import { applyThemeFromStorage } from './themeUtils.mjs';
+import { applySettingsFromStorage } from './themeUtils.mjs';
 
 export function setupFindLyricsPage() {
   burgerMenu();
   PageLoad();
-  applyThemeFromStorage();
+  applySettingsFromStorage();
   console.log('Search page loaded');
 
   // ---- TEST THROWS HIER ----
@@ -66,8 +65,53 @@ export function setupFindLyricsPage() {
     document.body.insertBefore(searchError, document.body.firstChild);
   }
 
-  // Lyrics-cache
+  // Lyrics-cache (in-memory)
   const lyricsCache = {};
+
+  // Track-cache (laatste 3 zoekopdrachten in localStorage)
+  const TRACK_CACHE_KEY = 'trackCacheRecent3';
+  const SAVED_SONGS_KEY = 'savedSongsV2';
+
+  function loadTrackCache() {
+    try {
+      return JSON.parse(localStorage.getItem(TRACK_CACHE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveTrackCache(cacheArr) {
+    localStorage.setItem(TRACK_CACHE_KEY, JSON.stringify(cacheArr));
+  }
+
+  function getCachedTracks(cacheArr, key) {
+    const found = cacheArr.find(entry => entry.key === key);
+    return found ? found.tracks : undefined;
+  }
+
+  function updateTrackCache(cacheArr, key, tracks) {
+    const filtered = cacheArr.filter(entry => entry.key !== key);
+    filtered.unshift({ key, tracks });
+    return filtered.slice(0, 3);
+  }
+
+  // Saved Songs helpers
+  function loadSavedSongs() {
+    try {
+      return JSON.parse(localStorage.getItem(SAVED_SONGS_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveSavedSongs(arr) {
+    localStorage.setItem(SAVED_SONGS_KEY, JSON.stringify(arr));
+  }
+
+  function isSongSaved(artist, track) {
+    const saved = loadSavedSongs();
+    return saved.some(s => s.artistName === artist && s.trackName === track);
+  }
 
   // ENTER to search
   if (searchInput && zoekLiedjesButton) {
@@ -96,20 +140,29 @@ export function setupFindLyricsPage() {
     showLoading();
 
     try {
-      // HIER ophalen, zodat je altijd het actuele aantal hebt!
       const songLimit = getSongLimit();
+      const cacheKey = `${query.toLowerCase()}|${songLimit}`;
+      let trackCacheArr = loadTrackCache();
+      let tracks = getCachedTracks(trackCacheArr, cacheKey);
 
-      const res = await safeFetch(
-        `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=${songLimit}`
-      );
-      const data = await res.json();
-
-      if (!data.results.length) {
-        showError('Geen resultaten gevonden.', 'info');
-        return;
+      if (tracks) {
+        console.log('Tracks loaded from localStorage cache:', cacheKey);
+      } else {
+        const res = await safeFetch(
+          `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=${songLimit}`
+        );
+        const data = await res.json();
+        if (!data.results.length) {
+          showError('Geen resultaten gevonden.', 'info');
+          return;
+        }
+        tracks = data.results;
+        // Update cache
+        trackCacheArr = updateTrackCache(trackCacheArr, cacheKey, tracks);
+        saveTrackCache(trackCacheArr);
       }
 
-      data.results.forEach(track => resultsDiv.appendChild(createTrackItem(track)));
+      tracks.forEach(track => resultsDiv.appendChild(createTrackItem(track)));
 
       // Wacht tot alle images geladen zijn
       const imgs = Array.from(resultsDiv.querySelectorAll('img'));
@@ -140,53 +193,106 @@ export function setupFindLyricsPage() {
     if (loadingOverlay) loadingOverlay.style.display = 'none';
   }
 
-  // Create track item
+  // Create track item (met lyrics overlay en opslaan)
   function createTrackItem({ artworkUrl100, trackName, artistName, collectionName, primaryGenreName, releaseDate, previewUrl }) {
     const div = document.createElement('div');
     div.className = 'song';
     const rd = new Date(releaseDate).toLocaleDateString('nl-BE');
+    const saved = isSongSaved(artistName, trackName);
 
     div.innerHTML = `
-    <div class="result-div">
-      <img src="${artworkUrl100}" alt="Album art">
-      <h3>${trackName}</h3>
-      <p><strong>Artiest:</strong> ${artistName}</p>
-      <p><strong>Album:</strong> ${collectionName}</p>
-      <p><strong>Genre:</strong> ${primaryGenreName}</p>
-      <p><strong>Releasedatum:</strong> ${rd}</p>
-      <audio class="preview" controls src="${previewUrl}"></audio>
-      <button class="toon-lyrics">Toon lyrics</button>
-      <div class="lyrics" style="display:none;"></div>
-    </div>
+      <div class="result-div">
+        <div class="result-div-inner">
+          <img src="${artworkUrl100}" alt="Album art">
+          <div class="result-text">
+            <h3>${trackName}</h3>
+            <p><strong>Artiest:</strong> ${artistName}</p>
+            <p><strong>Album:</strong> ${collectionName}</p>
+            <p><strong>Genre:</strong> ${primaryGenreName}</p>
+            <p><strong>Releasedatum:</strong> ${rd}</p>
+          </div>
+        </div>
+        <audio class="preview" controls src="${previewUrl}"></audio>
+        <button class="toon-lyrics">Toon lyrics</button>
+        <button class="save-song">${saved ? 'Niet meer opslaan' : 'Opslaan'}</button>
+        <div class="lyrics-overlay" style="display:none;">
+          <button class="close-lyrics" title="Sluiten">&times;</button>
+          <div class="lyrics-content">Loading…</div>
+        </div>
+      </div>
     `;
 
     const btn = div.querySelector('.toon-lyrics');
-    const lyricsDiv = div.querySelector('.lyrics');
+    const lyricsOverlay = div.querySelector('.lyrics-overlay');
+    const closeBtn = div.querySelector('.close-lyrics');
+    const lyricsContent = div.querySelector('.lyrics-content');
+    const saveBtn = div.querySelector('.save-song');
+
+    // Lyrics tonen
     btn.addEventListener('click', async () => {
       const key = `${artistName}|${trackName}`;
-      if (lyricsDiv.style.display === 'block') {
-        lyricsDiv.style.display = 'none';
-        btn.textContent = 'Toon lyrics';
-        return;
-      }
-      lyricsDiv.style.display = 'block';
-      btn.textContent = 'Verstop lyrics';
+      lyricsOverlay.style.display = 'flex';
+      btn.disabled = true;
+
       if (lyricsCache[key]) {
-        lyricsDiv.textContent = lyricsCache[key];
+        lyricsContent.textContent = lyricsCache[key];
       } else {
-        lyricsDiv.textContent = 'Loading…';
+        lyricsContent.textContent = 'Loading…';
         try {
-          // Ook hier safeFetch gebruiken!
           const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
           const d = await r.json();
           if (!d.lyrics) throw new Error('Lyrics niet gevonden.');
           lyricsCache[key] = d.lyrics;
-          lyricsDiv.textContent = d.lyrics;
+          lyricsContent.textContent = d.lyrics;
         } catch (e) {
-          lyricsDiv.textContent = e.message;
+          lyricsContent.textContent = e.message;
         }
       }
     });
+
+    closeBtn.addEventListener('click', () => {
+      lyricsOverlay.style.display = 'none';
+      btn.disabled = false;
+    });
+
+    lyricsOverlay.addEventListener('click', (e) => {
+      if (e.target === lyricsOverlay) {
+        lyricsOverlay.style.display = 'none';
+        btn.disabled = false;
+      }
+    });
+
+    // Opslaan/Verwijderen van song
+    saveBtn.addEventListener('click', async () => {
+      let savedSongs = loadSavedSongs();
+      const alreadySaved = isSongSaved(artistName, trackName);
+
+      if (alreadySaved) {
+        // Verwijder uit saved
+        savedSongs = savedSongs.filter(s => !(s.artistName === artistName && s.trackName === trackName));
+        saveBtn.textContent = 'Opslaan';
+      } else {
+        // Lyrics ophalen (uit cache of API)
+        let lyrics = lyricsCache[`${artistName}|${trackName}`];
+        if (!lyrics) {
+          try {
+            const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
+            const d = await r.json();
+            lyrics = d.lyrics || '';
+          } catch {
+            lyrics = '';
+          }
+        }
+        savedSongs.unshift({
+          artworkUrl100, trackName, artistName, collectionName, primaryGenreName, releaseDate, previewUrl, lyrics
+        });
+        // Beperk optioneel tot bv. 20 saved songs:
+        savedSongs = savedSongs.slice(0, 20);
+        saveBtn.textContent = 'Niet meer opslaan';
+      }
+      saveSavedSongs(savedSongs);
+    });
+
     return div;
   }
 }
