@@ -1,11 +1,11 @@
 import { burgerMenu } from './burgerMenu.mjs';
 import { PageLoad } from './pageLoad.mjs';
-import { applyThemeFromStorage } from './themeUtils.mjs';
+import { applySettingsFromStorage } from './themeUtils.mjs';
 
 export function setupHomePage() {
     burgerMenu();
     PageLoad();
-    applyThemeFromStorage();
+    applySettingsFromStorage
     console.log('Home page loaded');
 
 };
