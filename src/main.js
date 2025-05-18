@@ -118,9 +118,34 @@ const findlyrics = (container) => {
 
 const savedsongs = (container) => {
   container.innerHTML = `
-  <h1>Test</h1>
+  <div>
+    <nav class="navbar">
+      <div class="logo-container">
+        <img src="${logo}" alt="Logo" class="logo" size="100" width="100" height="100">
+      </div>
+      <ul>
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/findlyrics">Zoek Liedjes</a></li>
+        <li>
+          <div id="menuContainer">
+            <img id="burgerIcon" class="menu" src="${menuBurgerLightMode}" alt="Open menu">
+            <div id="burgerNav">
+              <img id="closeIcon" src="${closeIconLight}" alt="Sluit menu">
+              <h1>Menu</h1>
+              <ul class="burgernav">
+                <li><a href="#/savedsongs" class="active">Saved Songs</a></li>
+                <li id="settings"><a href="#/settings" class="settings"><img src="${gearIconLight}"> Settings</a>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+    <div id="savedSongsContainer"></div>
   `;
-}
+  setupSavedSongsPage();
+};
 
 const settings = (container) => {
   container.innerHTML = `
