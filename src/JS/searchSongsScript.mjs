@@ -138,7 +138,6 @@ export function setupFindLyricsPage() {
     hideError();
     resultsDiv.innerHTML = '';
     showLoading();
-
     try {
       const songLimit = getSongLimit();
       const cacheKey = `${query.toLowerCase()}|${songLimit}`;
@@ -227,25 +226,61 @@ export function setupFindLyricsPage() {
     const closeBtn = div.querySelector('.close-lyrics');
     const lyricsContent = div.querySelector('.lyrics-content');
     const saveBtn = div.querySelector('.save-song');
+    let lyricsDiv = null;
 
-    // Lyrics tonen
     btn.addEventListener('click', async () => {
       const key = `${artistName}|${trackName}`;
-      lyricsOverlay.style.display = 'flex';
-      btn.disabled = true;
-
-      if (lyricsCache[key]) {
-        lyricsContent.textContent = lyricsCache[key];
+      if (window.matchMedia("(min-width: 600px)").matches) {
+        lyricsOverlay.style.display = 'flex';
+        btn.disabled = true;
+        if (lyricsCache[key]) {
+          lyricsContent.textContent = lyricsCache[key];
+        } else {
+          lyricsContent.textContent = 'Loading…';
+          try {
+            const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
+            const d = await r.json();
+            if (!d.lyrics) throw new Error('Lyrics niet gevonden.');
+            lyricsCache[key] = d.lyrics;
+            lyricsContent.textContent = d.lyrics;
+          } catch (e) {
+            lyricsContent.textContent = e.message;
+          }
+        }
       } else {
-        lyricsContent.textContent = 'Loading…';
-        try {
-          const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
-          const d = await r.json();
-          if (!d.lyrics) throw new Error('Lyrics niet gevonden.');
-          lyricsCache[key] = d.lyrics;
-          lyricsContent.textContent = d.lyrics;
-        } catch (e) {
-          lyricsContent.textContent = e.message;
+        // MOBIEL: toggle gedrag
+        if (btn.textContent === 'Toon lyrics') {
+          lyricsOverlay.style.display = 'none';
+          if (!lyricsDiv) {
+            lyricsDiv = document.createElement('div');
+            lyricsDiv.className = 'lyrics lyrics-inline';
+            btn.insertAdjacentElement('afterend', lyricsDiv);
+          }
+          btn.textContent = 'Verberg lyrics';
+          btn.disabled = true;
+          if (lyricsCache[key]) {
+            lyricsDiv.textContent = lyricsCache[key];
+            btn.disabled = false;
+          } else {
+            lyricsDiv.textContent = 'Loading…';
+            try {
+              const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
+              const d = await r.json();
+              if (!d.lyrics) throw new Error('Lyrics niet gevonden.');
+              lyricsCache[key] = d.lyrics;
+              lyricsDiv.textContent = d.lyrics;
+            } catch (e) {
+              lyricsDiv.textContent = e.message;
+            } finally {
+              btn.disabled = false;
+            }
+          }
+        } else {
+          if (lyricsDiv) {
+            lyricsDiv.remove();
+            lyricsDiv = null;
+          }
+          btn.textContent = 'Toon lyrics';
         }
       }
     });
@@ -268,11 +303,9 @@ export function setupFindLyricsPage() {
       const alreadySaved = isSongSaved(artistName, trackName);
 
       if (alreadySaved) {
-        // Verwijder uit saved
         savedSongs = savedSongs.filter(s => !(s.artistName === artistName && s.trackName === trackName));
         saveBtn.textContent = 'Opslaan';
       } else {
-        // Lyrics ophalen (uit cache of API)
         let lyrics = lyricsCache[`${artistName}|${trackName}`];
         if (!lyrics) {
           try {
@@ -286,7 +319,6 @@ export function setupFindLyricsPage() {
         savedSongs.unshift({
           artworkUrl100, trackName, artistName, collectionName, primaryGenreName, releaseDate, previewUrl, lyrics
         });
-        // Beperk optioneel tot bv. 20 saved songs:
         savedSongs = savedSongs.slice(0, 20);
         saveBtn.textContent = 'Niet meer opslaan';
       }
