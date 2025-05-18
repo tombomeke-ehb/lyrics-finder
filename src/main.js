@@ -2,6 +2,7 @@ import Router from './JS/router.mjs'
 import { setupHomePage } from './JS/homepageScript.mjs';
 import { setupFindLyricsPage } from './JS/searchSongsScript.mjs';
 import { setupSettingsPage } from './JS/settingsScript.mjs';
+import { setupSavedSongsPage } from './JS/savedSongsScript.mjs';
 import './CSS/style.css'
 
 // Images
@@ -41,6 +42,32 @@ const home = (container) => {
       </ul>
     </nav>
   </div>
+  <div class="intro-text">
+  <h1>Welkom bij Lyrics Finder!</h1>
+
+  <p>
+    Met Lyrics Finder zoek je razendsnel naar je favoriete liedjes én hun songteksten.
+    Typ de naam van een artiest of een nummer in het zoekveld, en ontdek direct de bijbehorende tracks.
+  </p>
+
+  <p>
+    Klik op "Toon lyrics" om de volledige songtekst te bekijken, of luister naar een korte preview van het nummer.
+  </p>
+
+  <p>
+    Heb je een liedje gevonden dat je wilt bewaren? Sla het eenvoudig op met de "Opslaan"-knop, zodat je het later altijd snel terugvindt onder Saved Songs.
+  </p>
+
+  <h2>Handige tips:</h2>
+  <ul>
+    <li>Gebruik het menu om te navigeren tussen zoeken, opgeslagen liedjes en instellingen.</li>
+    <li>In de instellingen kun je het thema wijzigen (licht/donker), animaties aan- of uitzetten, en het aantal zoekresultaten aanpassen.</li>
+  </ul>
+
+  <p>
+    Veel plezier met het ontdekken van muziek en lyrics!
+  </p>
+</div>
   `;
   setupHomePage();
 };
