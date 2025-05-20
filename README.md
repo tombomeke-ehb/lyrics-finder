@@ -1,6 +1,6 @@
 # Lyrics Finder - Single Page Application
 
-![Lyrics Finder Screenshot](./screenshots/main.png)
+![Lyrics Finder Screenshot](./public/screenshots/home-dark.png)
 
 ## Projectbeschrijving en functionaliteiten
 
@@ -32,7 +32,7 @@ Lyrics Finder is een interactieve single-page applicatie waarmee gebruikers:
 4. **Gebruikerservaring**
    - Volledig responsive design (mobile/desktop)
    - Foutafhandeling met duidelijke meldingen
-   - Intuïtieve navigatie met burger menu
+   - Intuïtieve navigatie met burgermenu
    - Lazy loading van afbeeldingen
 
 ---
@@ -57,41 +57,41 @@ Lyrics Finder is een interactieve single-page applicatie waarmee gebruikers:
 
 ### DOM Manipulatie
 
-| Concept                | Locatie                | Voorbeeld                          |
-|------------------------|------------------------|------------------------------------|
-| Elementen selecteren   | `searchSongsScript.mjs`| `document.getElementById()`        |
-| Elementen manipuleren  | `searchSongsScript.mjs`| `innerHTML`, `classList`           |
-| Events koppelen        | `burgerMenu.mjs`       | `addEventListener`                 |
+| Concept                | Locatie                | Lijnnummers | Voorbeeld                          |
+|------------------------|------------------------|-------------|------------------------------------|
+| Elementen selecteren   | `searchSongsScript.mjs`| 45-50       | `document.getElementById()`        |
+| Elementen manipuleren  | `searchSongsScript.mjs`| 160-240     | `innerHTML`, `classList`           |
+| Events koppelen        | `burgerMenu.mjs`       | 15-25       | `addEventListener`                 |
 
 ### Modern JavaScript
 
-| Concept           | Locatie                | Voorbeeld                           |
-|-------------------|------------------------|-------------------------------------|
-| Constantes        | `settingsScript.mjs`   | `SAVED_SONGS_KEY`                   |
-| Template literals | `searchSongsScript.mjs`| `` `Artiest: ${artistName}` ``      |
-| Array methodes    | `savedSongsScript.mjs` | `filter()`, `some()`                |
-| Arrow functions   | `searchSongsScript.mjs`| `() => {}`                          |
-| Async/Await       | `searchSongsScript.mjs`| `async searchSongs()`               |
-| Observer API      | `searchSongsScript.mjs`| `IntersectionObserver`              |
+| Concept           | Locatie                | Lijnnummers | Voorbeeld                           |
+|-------------------|------------------------|-------------|-------------------------------------|
+| Constantes        | `settingsScript.mjs`   | 5           | `SAVED_SONGS_KEY`                   |
+| Template literals | `searchSongsScript.mjs`| 168-186     | `` `Artiest: ${artistName}` ``      |
+| Array methodes    | `savedSongsScript.mjs` | 20          | `filter()`, `some()`                |
+| Arrow functions   | `searchSongsScript.mjs`| 56          | `() => {}`                          |
+| Async/Await       | `searchSongsScript.mjs`| 56, 124     | `async searchSongs()`               |
+| Observer API      | `searchSongsScript.mjs`| 33-42       | `IntersectionObserver`              |
 
 ### Data & API
 
-| Concept         | Locatie                | Details                |
-|-----------------|------------------------|------------------------|
-| Fetch API       | `searchSongsScript.mjs`| `safeFetch()` wrapper  |
-| JSON manipulatie| `searchSongsScript.mjs`| `res.json()`           |
+| Concept         | Locatie                | Lijnnummers | Details                |
+|-----------------|------------------------|-------------|------------------------|
+| Fetch API       | `searchSongsScript.mjs`| 124-130     | `safeFetch()` wrapper  |
+| JSON manipulatie| `searchSongsScript.mjs`| 128         | `res.json()`           |
 
 ### Opslag & Validatie
 
-| Concept        | Locatie                | Implementatie         |
-|----------------|------------------------|-----------------------|
-| LocalStorage   | `savedSongsScript.mjs` | `getItem/setItem`     |
-| Form validatie | `searchSongsScript.mjs`| Minimaal 2 karakters  |
+| Concept        | Locatie                | Lijnnummers | Implementatie         |
+|----------------|------------------------|-------------|-----------------------|
+| LocalStorage   | `savedSongsScript.mjs` | 15-25       | `getItem/setItem`     |
+| Form validatie | `searchSongsScript.mjs`| 114-120     | Minimaal 2 karakters  |
 
 ### Observer API Implementatie
 
-```
-// searchSongsScript.mjs (regel 33-42)
+```JavaScript
+// searchSongsScript.mjs (lijnen 33-42)
 const lazyLoadObserver = new IntersectionObserver((entries) => {
 entries.forEach(entry => {
 if (entry.isIntersecting) {
@@ -104,6 +104,20 @@ lazyLoadObserver.unobserve(img);
 rootMargin: '200px'
 });
 ```
+
+---
+
+## Belangrijke Functionaliteiten
+
+| Functionaliteit         | Bestand               | Lijnnummers   |
+|------------------------|-----------------------|--------------|
+| Zoekfunctionaliteit    | searchSongsScript.mjs | 56-140       |
+| Favorieten opslaan     | savedSongsScript.mjs  | 15-50        |
+| Thema switching        | settingsScript.mjs    | 10-35        |
+| Error handling         | errorHandling.mjs     | 1-60         |
+| Routering              | router.mjs            | 1-30         |
+
+---
 
 ## Installatiehandleiding
 
@@ -140,7 +154,7 @@ rootMargin: '200px'
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| ![Dark Mode](./screenshots/dark.png) | ![Light Mode](./public/screenshots/light.png) |
+| ![Dark Mode](./screenshots/home-dark.png) | ![Light Mode](./public/screenshots/home-light.png) |
 
 ---
 
@@ -155,7 +169,7 @@ rootMargin: '200px'
 
 ## Commits geschiedenis
 
-[Vorige Commits](./public/screenshots/image.png)
+[Vorige Commits](./public/screenshots/commits.png)  
 [Commit history](https://github.com/tombomeke-ehb/lyrics-finder/commits/main)
 
 
@@ -218,41 +232,41 @@ Lyrics Finder is an interactive single-page application that allows users to:
 
 ### DOM Manipulation
 
-| Concept                | Location                | Example                          |
-|------------------------|------------------------|----------------------------------|
-| Selecting elements     | `searchSongsScript.mjs` | `document.getElementById()`      |
-| Manipulating elements  | `searchSongsScript.mjs` | `innerHTML`, `classList`         |
-| Event listeners        | `burgerMenu.mjs`        | `addEventListener`               |
+| Concept                | Location                | Line Numbers | Example                          |
+|------------------------|------------------------|--------------|----------------------------------|
+| Selecting elements     | `searchSongsScript.mjs`| 45-50        | `document.getElementById()`      |
+| Manipulating elements  | `searchSongsScript.mjs`| 160-240      | `innerHTML`, `classList`         |
+| Event listeners        | `burgerMenu.mjs`       | 15-25        | `addEventListener`               |
 
 ### Modern JavaScript
 
-| Concept           | Location                | Example                           |
-|-------------------|------------------------|-----------------------------------|
-| Constants         | `settingsScript.mjs`   | `SAVED_SONGS_KEY`                 |
-| Template literals | `searchSongsScript.mjs`| `` `Artist: ${artistName}` ``     |
-| Array methods     | `savedSongsScript.mjs` | `filter()`, `some()`              |
-| Arrow functions   | `searchSongsScript.mjs`| `() => {}`                        |
-| Async/Await       | `searchSongsScript.mjs`| `async searchSongs()`             |
-| Observer API      | `searchSongsScript.mjs`| `IntersectionObserver`            |
+| Concept           | Location                | Line Numbers | Example                           |
+|-------------------|------------------------|--------------|-----------------------------------|
+| Constants         | `settingsScript.mjs`   | 5            | `SAVED_SONGS_KEY`                 |
+| Template literals | `searchSongsScript.mjs`| 168-186      | `` `Artist: ${artistName}` ``     |
+| Array methods     | `savedSongsScript.mjs` | 20           | `filter()`, `some()`              |
+| Arrow functions   | `searchSongsScript.mjs`| 56           | `() => {}`                        |
+| Async/Await       | `searchSongsScript.mjs`| 56, 124      | `async searchSongs()`             |
+| Observer API      | `searchSongsScript.mjs`| 33-42        | `IntersectionObserver`            |
 
 ### Data & API
 
-| Concept         | Location                | Details                |
-|-----------------|------------------------|------------------------|
-| Fetch API       | `searchSongsScript.mjs`| `safeFetch()` wrapper  |
-| JSON handling   | `searchSongsScript.mjs`| `res.json()`           |
+| Concept         | Location                | Line Numbers | Details                |
+|-----------------|------------------------|--------------|------------------------|
+| Fetch API       | `searchSongsScript.mjs`| 124-130      | `safeFetch()` wrapper  |
+| JSON handling   | `searchSongsScript.mjs`| 128          | `res.json()`           |
 
 ### Storage & Validation
 
-| Concept        | Location                | Implementation         |
-|----------------|------------------------|------------------------|
-| LocalStorage   | `savedSongsScript.mjs` | `getItem/setItem`      |
-| Form validation| `searchSongsScript.mjs`| Minimum 2 characters   |
+| Concept        | Location                | Line Numbers | Implementation         |
+|----------------|------------------------|--------------|------------------------|
+| LocalStorage   | `savedSongsScript.mjs` | 15-25        | `getItem/setItem`      |
+| Form validation| `searchSongsScript.mjs`| 114-120      | Minimum 2 characters   |
 
 ### Observer API Implementation
 
-```
-// searchSongsScript.mjs (lines 33-42)
+```JavaScript
+// searchSongsScript.mjs (lijnen 33-42)
 const lazyLoadObserver = new IntersectionObserver((entries) => {
 entries.forEach(entry => {
 if (entry.isIntersecting) {
@@ -265,6 +279,20 @@ lazyLoadObserver.unobserve(img);
 rootMargin: '200px'
 });
 ```
+
+---
+
+## Key Features
+
+| Feature                | File                  | Line Numbers   |
+|------------------------|-----------------------|---------------|
+| Search functionality   | searchSongsScript.mjs | 56-140        |
+| Save favorites         | savedSongsScript.mjs  | 15-50         |
+| Theme switching        | settingsScript.mjs    | 10-35         |
+| Error handling         | errorHandling.mjs     | 1-60          |
+| Routing                | router.mjs            | 1-30          |
+
+---
 
 ## Installation Guide
 
