@@ -120,6 +120,7 @@ const findlyrics = (container) => {
       <option value="2020">2020 - Heden</option>
       <option value="2010">2010 - 2019</option>
       <option value="2000">2000 - 2009</option>
+      <option value="1999">Ouder - 1999</option>
     </select>
   </div>
 
@@ -179,6 +180,43 @@ const savedsongs = (container) => {
       </ul>
     </nav>
   </div>
+  <div class="filters-container">
+  <div class="filter-group">
+    <label for="genre-filter">Genre</label>
+    <select id="genre-filter">
+      <option value="">Alle genres</option>
+      <option value="Pop">Pop</option>
+      <option value="Rock">Rock</option>
+      <option value="Hip-Hop">Hip-Hop</option>
+      <option value="Electronic">Electronic</option>
+      <option value="R&B">R&B</option>
+      <option value="Alternative">Alternative</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="year-filter">Tijdperk</label>
+    <select id="year-filter">
+      <option value="">Alle jaren</option>
+      <option value="2020">2020 - Heden</option>
+      <option value="2010">2010 - 2019</option>
+      <option value="2000">2000 - 2009</option>
+      <option value="1999">Ouder - 1999</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="sort-select">Sorteren op</label>
+    <select id="sort-select">
+      <option value="relevance">Relevantie</option>
+      <option value="name">Titel</option>
+      <option value="artist">Artiest</option>
+      <option value="date">Datum (nieuwste)</option>
+    </select>
+  </div>
+
+  <button id="reset-filters">Filters resetten</button>
+</div>
+<h1 class="saved-song-title">Saved Songs</h1>
     <div class="input-container" id="input-container">
     <div id="results"></div>
     </div>
@@ -237,6 +275,9 @@ const settings = (container) => {
     <option value="10">10</option>
     <option value="20">20</option>
     <option value="25">25</option>
+    <option value="30">30</option>
+    <option value="35">35</option>
+    <option value="40">40</option>
   </select>
 </div>
   <button id="clear-cache">🧹 Cache/data wissen</button>
