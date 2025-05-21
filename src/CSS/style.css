@@ -720,6 +720,10 @@ body.light-mode .input-container {
   background: #ffffff;
 }
 
+body.light-mode .intro-text li{
+  color: black;
+}
+
 /* Navigation */
 body.light-mode .navbar {
   border-bottom: 3px solid #181818 !important;
