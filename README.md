@@ -137,7 +137,7 @@ rootMargin: '200px'
 -   [Download](https://git-scm.com/downloads/win)
 -   klik op "Click here to download
 
-3. **Clone de repository:**
+3. **Clone de repository: (niet de build versie)**
     ```
     git clone https://github.com/tombomeke-ehb/lyrics-finder.git
     cd lyrics-finder
@@ -146,7 +146,7 @@ rootMargin: '200px'
 4. ***In geval van build mode(dir)***
    - download dir folder
       ```
-      cd downloads
+      cd downloads (of waar je da dir folder hebt staan)
       cd dir
       ```
 
@@ -345,7 +345,7 @@ rootMargin: '200px'
 -   [Download](https://git-scm.com/downloads/win)
 -   Click on "Click here to download
 
-3. **Clone the repository:**
+3. **Clone the repository: (not build version)**
     ```
     git clone https://github.com/tombomeke-ehb/lyrics-finder.git
     cd lyrics-finder
@@ -354,7 +354,7 @@ rootMargin: '200px'
 4. ***In case of using build mode(dir)***
    - download dir folder
       ```
-      cd downloads
+      cd downloads (or where you downloaded the dir file)
       cd dir
       ```
 
