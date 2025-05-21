@@ -135,7 +135,7 @@ rootMargin: '200px'
 
 2. **Install git**
 -   [Download](https://git-scm.com/downloads/win)
--   klik op "Click here to download
+   -   klik op "Click here to download
 
 3. **Clone de repository: (niet de build versie)**
     ```
