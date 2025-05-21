@@ -193,6 +193,7 @@ rootMargin: '200px'
 - [Vite Documentation](https://vitejs.dev/)
 - [ChatGPT](https://chatgpt.com/share/682d1dd8-81bc-8006-8e0d-5d9ac1322948)
 - [PerplexityAI](https://www.perplexity.ai/search/i-am-hosting-my-website-on-my-Clc8SB_QTG2u8tcxfBSoPQ)
+- [Icons SVG](https://icons8.com/)
 
 ---
 
@@ -400,6 +401,7 @@ rootMargin: '200px'
 - [Vite Documentation](https://vitejs.dev/)
 - [ChatGPT](https://chatgpt.com/share/682d1dd8-81bc-8006-8e0d-5d9ac1322948)
 - [PerplexityAI](https://www.perplexity.ai/search/i-am-hosting-my-website-on-my-Clc8SB_QTG2u8tcxfBSoPQ)
+- [Icons SVG](https://icons8.com/)
 
 ---
 
