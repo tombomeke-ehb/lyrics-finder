@@ -104,6 +104,8 @@ export function setupFindLyricsPage() {
         matchesYear = releaseYear >= 2010 && releaseYear <= 2019;
       } else if (yearValue === '2000') {
         matchesYear = releaseYear >= 2000 && releaseYear <= 2009;
+      }else if (yearValue === '1999'){
+        matchesYear = releaseYear <= 1999
       }
       
       return matchesGenre && matchesYear;
