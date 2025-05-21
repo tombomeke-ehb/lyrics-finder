@@ -858,6 +858,19 @@ body.light-mode .preview::-webkit-media-controls-panel {
   background: #f5f5f5 !important;
 }
 
+body.light-mode .preview::-webkit-media-controls-play-button,
+body.light-mode .preview::-webkit-media-controls-mute-button,
+body.light-mode .preview::-webkit-media-controls-timeline,
+body.light-mode .preview::-webkit-media-controls-current-time-display,
+body.light-mode .preview::-webkit-media-controls-time-remaining-display,
+body.light-mode .preview::-webkit-media-controls-volume-slider-container,
+body.light-mode .preview::-webkit-media-controls-volume-slider,
+body.light-mode .preview::-webkit-media-controls-seek-back-button,
+body.light-mode .preview::-webkit-media-controls-seek-forward-button {
+  color: #181818 !important;
+  background-color: #f5f5f5 !important;
+}
+
 /* Settings Panel */
 body.light-mode .settings-panel {
   background: #fff !important;
