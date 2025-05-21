@@ -177,6 +177,8 @@ rootMargin: '200px'
 - [Lyrics.ovh API](https://lyricsovh.docs.apiary.io/)
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Vite Documentation](https://vitejs.dev/)
+- [ChatGPT](https://chatgpt.com/share/682d1dd8-81bc-8006-8e0d-5d9ac1322948)
+- [PerplexityAI](https://www.perplexity.ai/search/i-am-hosting-my-website-on-my-Clc8SB_QTG2u8tcxfBSoPQ)
 
 ---
 
@@ -323,17 +325,24 @@ rootMargin: '200px'
     cd lyrics-finder
     ```
 
-2. **Install dependencies:**
+2. ***In case of using build mode(dir)***
+   - download dir folder
+      ```
+      cd downloads
+      cd dir
+      ```
+
+3. **Install dependencies:**
     ```
     npm install
     ```
 
-3. **Start the development server:**
+4. **Start the development server:**
     ```
     npm run dev
     ```
 
-4. **Open the application:**
+5. **Open the application:**
     - [http://localhost:5173](http://localhost:5173)
 
 ---
@@ -357,6 +366,8 @@ rootMargin: '200px'
 - [Lyrics.ovh API](https://lyricsovh.docs.apiary.io/)
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Vite Documentation](https://vitejs.dev/)
+- [ChatGPT](https://chatgpt.com/share/682d1dd8-81bc-8006-8e0d-5d9ac1322948)
+- [PerplexityAI](https://www.perplexity.ai/search/i-am-hosting-my-website-on-my-Clc8SB_QTG2u8tcxfBSoPQ)
 
 ---
 
