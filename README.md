@@ -124,35 +124,43 @@ rootMargin: '200px'
 ### Vereisten
 
 - Node.js (v18+)
+- Git
 - npm (v9+)
 - Moderne browser (Chrome, Firefox, Edge)
 
 ### Installatiestappen
 
-1. **Clone de repository:**
+1. **Download Node.js**
+-   [Download](https://nodejs.org/en/download)
+
+2. **Install git**
+-   [Download](https://git-scm.com/downloads/win)
+-   klik op "Click here to download
+
+3. **Clone de repository:**
     ```
     git clone https://github.com/tombomeke-ehb/lyrics-finder.git
     cd lyrics-finder
     ```
 
-2. ***In geval van build mode(dir)***
+4. ***In geval van build mode(dir)***
    - download dir folder
       ```
       cd downloads
       cd dir
       ```
 
-3. **Installeer dependencies:**
+5. **Installeer dependencies:**
     ```
     npm install
     ```
 
-4. **Start development server:**
+6. **Start development server:**
     ```
     npm run dev
     ```
 
-5. **Open de applicatie:**
+7. **Open de applicatie:**
     - [http://localhost:5173](http://localhost:5173)
 
 ---
@@ -191,7 +199,12 @@ rootMargin: '200px'
 ## Commits geschiedenis
 
 [Vorige Commits](./public/screenshots/commits.png)  
-[Commit history](https://github.com/tombomeke-ehb/lyrics-finder/commits/main)
+[Commit geschiedenis](https://github.com/tombomeke-ehb/lyrics-finder/commits/main)
+
+
+
+---
+
 
 
 # Lyrics Finder - Single Page Application
@@ -325,30 +338,37 @@ rootMargin: '200px'
 
 ### Installation Steps
 
-1. **Clone the repository:**
+1. **Download Node.js**
+-   [Download](https://nodejs.org/en/download)
+
+2. **Install git**
+-   [Download](https://git-scm.com/downloads/win)
+-   Click on "Click here to download
+
+3. **Clone the repository:**
     ```
     git clone https://github.com/tombomeke-ehb/lyrics-finder.git
     cd lyrics-finder
     ```
 
-2. ***In case of using build mode(dir)***
+4. ***In case of using build mode(dir)***
    - download dir folder
       ```
       cd downloads
       cd dir
       ```
 
-3. **Install dependencies:**
+5. **Install dependencies:**
     ```
     npm install
     ```
 
-4. **Start the development server:**
+6. **Start the development server:**
     ```
     npm run dev
     ```
 
-5. **Open the application:**
+7. **Open the application:**
     - [http://localhost:5173](http://localhost:5173)
 
 ---
