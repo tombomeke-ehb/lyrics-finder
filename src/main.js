@@ -15,6 +15,7 @@ const menuBurgerDarkMode = '.c/images/menu-burger-darkmode.svg'
 const closeIconLight = './images/close-button-white.svg'
 const gearIconLight = './images/gear-icon-light-mode.svg'
 
+// Home page
 const home = (container) => {
   container.innerHTML = `
   <link rel="icon" type="image/png" href="${favicon}" />
@@ -73,7 +74,7 @@ const home = (container) => {
 };
 
 
-
+// Search Songs page
 const findlyrics = (container) => {
   container.innerHTML = `
   <div>
@@ -151,6 +152,7 @@ const findlyrics = (container) => {
   setupFindLyricsPage();
 };
 
+// Saved Songs page
 const savedsongs = (container) => {
   container.innerHTML = `
   <div>
@@ -184,6 +186,7 @@ const savedsongs = (container) => {
   setupSavedSongsPage();
 };
 
+// Settings page
 const settings = (container) => {
   container.innerHTML = `
     <div>

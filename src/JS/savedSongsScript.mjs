@@ -32,7 +32,7 @@ export function setupSavedSongsPage() {
     return;
   }
 
-  // Maak een wrapper voor dezelfde structuur als de zoekresultaten
+  //Same structure as in findLyricsScript.mjs
   const resultsDiv = document.createElement('div');
   resultsDiv.id = 'results';
   resultsDiv.className = 'results';

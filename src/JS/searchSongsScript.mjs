@@ -308,12 +308,15 @@ resetFiltersBtn.addEventListener('click', resetFilters);
               lyricsContent.textContent = lyricsCache[key];
             } catch (e) {
               lyricsContent.textContent = 'Fout bij laden lyrics.';
+              error.error = e;
+              console.error('Error fetching lyrics:', e);
+              showError('Fout bij laden lyrics.', error);
             }
           }
         }
       });
     }
-
+// Close lyrics overlay
     if (closeBtn && lyricsOverlay) {
       closeBtn.addEventListener('click', () => {
         lyricsOverlay.style.display = 'none';
