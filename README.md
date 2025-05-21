@@ -358,6 +358,12 @@ rootMargin: '200px'
 | ![Saved Songs](/public/screenshots/savedsongs-dark.png) | ![Saved Songs](/public/screenshots/savedsongs-light.png) |
 | ![Saved Songs Example](/public/screenshots/savedsongs-example-dark.png) | ![Saved Songs Example](/public/screenshots/savedsongs-example-light.png) |
 | ![Settings](/public/screenshots/settings-dark.png) | ![Settings](/public/screenshots/settings-light.png) |
+| ![Mobile Home](/public/screenshots/mobile-home-dark.png) | ![Mobile Home](/public/screenshots/mobile-home-light.png) |
+| ![Mobile Home-Menu](/public/screenshots/mobile-home-menu-dark.png) | ![Mobile Home-Menu](/public/screenshots/mobile-home-menu-light.png) |
+| ![Mobile Search Songs](/public/screenshots/mobile-songs-dark.png) | ![Mobile Search Songs](/public/screenshots/mobile-songs-light.png) |
+| ![Mobile Search Songs Example](/public/screenshots/mobile-songs-example-dark.png) | ![Mobile Search Songs Example](/public/screenshots/mobile-songs-example-light.png) |
+| ![Mobile Saved Songs Example](/public/screenshots/mobile-savedsongs-dark.png) | ![Mobile Saved Songs Example](/public/screenshots/mobile-savedsongs-light.png) |
+| ![Mobile Settings](/public/screenshots/mobile-settings-dark.png) | ![Mobile Settings](/public/screenshots/mobile-settings-light.png) |
 
 ---
 ## Sources
