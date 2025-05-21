@@ -135,17 +135,24 @@ rootMargin: '200px'
     cd lyrics-finder
     ```
 
-2. **Installeer dependencies:**
+2. ***In geval van build mode(dir)***
+   - download dir folder
+      ```
+      cd downloads
+      cd dir
+      ```
+
+3. **Installeer dependencies:**
     ```
     npm install
     ```
 
-3. **Start development server:**
+4. **Start development server:**
     ```
     npm run dev
     ```
 
-4. **Open de applicatie:**
+5. **Open de applicatie:**
     - [http://localhost:5173](http://localhost:5173)
 
 ---
@@ -154,7 +161,13 @@ rootMargin: '200px'
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| ![Dark Mode](./screenshots/home-dark.png) | ![Light Mode](./public/screenshots/home-light.png) |
+| ![Home](/public/screenshots/home-dark.png) | ![Home](/public/screenshots/home-light.png) |
+| ![Home-Menu](/public/screenshots/home-menu-dark.png) | ![Home-Menu](/public/screenshots/home-menu-light.png) |
+| ![Search Songs](/public/screenshots/songs-dark.png) | ![Search Songs](/public/screenshots/songs-light.png) |
+| ![Search Songs Example](/public/screenshots/songs-example-dark.png) | ![Search Songs Example](/public/screenshots/songs-example-light.png) |
+| ![Saved Songs](/public/screenshots/savedsongs-dark.png) | ![Saved Songs](/public/screenshots/savedsongs-light.png) |
+| ![Saved Songs Example](/public/screenshots/savedsongs-example-dark.png) | ![Saved Songs Example](/public/screenshots/savedsongs-example-light.png) |
+| ![Settings](/public/screenshots/settings-dark.png) | ![Settings](/public/screenshots/settings-light.png) |
 
 ---
 
@@ -175,7 +188,7 @@ rootMargin: '200px'
 
 # Lyrics Finder - Single Page Application
 
-![Lyrics Finder Screenshot](./screenshots/main.png)
+![Lyrics Finder Screenshot](/public/screenshots/home-dark.png)
 
 ## Project Description and Features
 
@@ -329,10 +342,15 @@ rootMargin: '200px'
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| ![Dark Mode](./screenshots/dark.png) | ![Light Mode](./public/screenshots/light.png) |
+| ![Home](/public/screenshots/home-dark.png) | ![Home](/public/screenshots/home-light.png) |
+| ![Home-Menu](/public/screenshots/home-menu-dark.png) | ![Home-Menu](/public/screenshots/home-menu-light.png) |
+| ![Search Songs](/public/screenshots/songs-dark.png) | ![Search Songs](/public/screenshots/songs-light.png) |
+| ![Search Songs Example](/public/screenshots/songs-example-dark.png) | ![Search Songs Example](/public/screenshots/songs-example-light.png) |
+| ![Saved Songs](/public/screenshots/savedsongs-dark.png) | ![Saved Songs](/public/screenshots/savedsongs-light.png) |
+| ![Saved Songs Example](/public/screenshots/savedsongs-example-dark.png) | ![Saved Songs Example](/public/screenshots/savedsongs-example-light.png) |
+| ![Settings](/public/screenshots/settings-dark.png) | ![Settings](/public/screenshots/settings-light.png) |
 
 ---
-
 ## Sources
 
 - [iTunes API Docs](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/)
