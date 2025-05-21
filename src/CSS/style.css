@@ -57,6 +57,10 @@ p {
   display: list-item;     
 }
 
+.saved-song-title{
+  text-align: center;
+}
+
 /* ==================== */
 /* NAVIGATION */
 /* ==================== */
