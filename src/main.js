@@ -77,6 +77,7 @@ const home = (container) => {
 // Search Songs page
 const findlyrics = (container) => {
   container.innerHTML = `
+  <link rel="icon" type="image/png" href="${favicon}" />
   <div>
     <nav class="navbar">
       <div class="logo-container"><img src="${logo}" alt="Logo" class="logo" size="100" width="100" height="100"></div>
@@ -156,6 +157,7 @@ const findlyrics = (container) => {
 // Saved Songs page
 const savedsongs = (container) => {
   container.innerHTML = `
+  <link rel="icon" type="image/png" href="${favicon}" />
   <div>
     <nav class="navbar">
       <div class="logo-container">
@@ -227,6 +229,7 @@ const savedsongs = (container) => {
 // Settings page
 const settings = (container) => {
   container.innerHTML = `
+  <link rel="icon" type="image/png" href="${favicon}" />
     <div>
       <nav class="navbar">
         <div class="logo-container">
