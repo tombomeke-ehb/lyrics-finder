@@ -22,7 +22,7 @@ export function setupSavedSongsPage() {
   applySettingsFromStorage();
   console.log('Saved Songs page loaded');
 
-  const container = document.getElementById('savedSongsContainer');
+  const container = document.getElementById('input-container');
   if (!container) return;
   container.innerHTML = '';
 
