@@ -4,22 +4,29 @@ class Router {
         this.rootElem = document.getElementById('app');
 
         // Luister naar hash changes
-        window.addEventListener('hashchange', () => this.handeleRouteChange());
+        window.addEventListener('hashchange', () => this.handleRouteChange());
 
         // Trigger initiele pagina load
-        this.handeleRouteChange();
+        this.handleRouteChange();
     }
 
-    handeleRouteChange() {
+    handleRouteChange() {
         // verwijder de # uit de hash
         const path = window.location.hash.slice(1) || '/';
 
-        // Vind de kuiste route handler
-        const route = this.routes[path] || this.route['/404'];
+        // Vind de juiste route handler
+        const route = this.routes[path] || this.routes['/404'];
+        if (typeof route !== 'function' || !this.rootElem) {
+            return;
+        }
 
         this.rootElem.innerHTML = '';
 
-        route (this.rootElem);
+        route(this.rootElem);
+        this.rootElem.classList.remove('page-enter');
+        requestAnimationFrame(() => {
+            this.rootElem.classList.add('page-enter');
+        });
     }
 }
 

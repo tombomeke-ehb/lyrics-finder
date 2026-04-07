@@ -5,7 +5,7 @@ import { applySettingsFromStorage } from './themeUtils.mjs';
 export function setupHomePage() {
     burgerMenu();
     PageLoad();
-    applySettingsFromStorage
+    applySettingsFromStorage();
     console.log('Home page loaded');
 
 };
