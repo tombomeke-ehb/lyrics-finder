@@ -8,10 +8,8 @@ import './CSS/style.css'
 // Images
 
 const logo = './images/logo.png'
-const logoWhite = './images/logo-white.png'
 const favicon = './images/favicon1.png'
 const menuBurgerLightMode = './images/menu-burger-lightmode.svg'
-const menuBurgerDarkMode = '.c/images/menu-burger-darkmode.svg'
 const closeIconLight = './images/close-button-white.svg'
 const gearIconLight = './images/gear-icon-light-mode.svg'
 
@@ -35,7 +33,7 @@ const home = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a href="#/settings" class="settings"><img src="${gearIconLight}"> Settings</a>
+                <li id="settings"><a href="#/settings" class="settings"><img src="${gearIconLight}"> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -92,7 +90,7 @@ const findlyrics = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs">Saved Songs</a></li>
-                <li id="settings"><a href="#/settings" class="settings"><img id='gear-icon' src="${gearIconLight}"> Settings</a>
+                <li id="settings"><a href="#/settings" class="settings"><img id='gear-icon' src="${gearIconLight}"> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -142,13 +140,11 @@ const findlyrics = (container) => {
 
     <input type="text" id="searchInput" minlength="2" required placeholder="Typ artiest of liedtitel..." />
     <button id="zoekLiedjes">Zoek liedjes</button>
+    <div id="recent-searches" class="recent-searches" aria-live="polite"></div>
+    <p id="results-summary" class="results-summary"></p>
 
     <div id="results"></div>
 
-  </div>
-
-  <div id="burgerNav">
-    <h1>Menu</h1>
   </div>
   `;
   setupFindLyricsPage();
@@ -174,7 +170,7 @@ const savedsongs = (container) => {
               <h1>Menu</h1>
               <ul class="burgernav">
                 <li><a href="#/savedsongs" class="active">Saved Songs</a></li>
-                <li id="settings"><a href="#/settings" class="settings"><img src="${gearIconLight}"> Settings</a>
+                <li id="settings"><a href="#/settings" class="settings"><img src="${gearIconLight}"> Settings</a></li>
               </ul>
             </div>
           </div>
@@ -220,6 +216,7 @@ const savedsongs = (container) => {
 </div>
 <h1 class="saved-song-title">Saved Songs</h1>
     <div class="input-container" id="input-container">
+  <p id="saved-results-summary" class="results-summary"></p>
     <div id="results"></div>
     </div>
   `;
@@ -272,6 +269,30 @@ const settings = (container) => {
   </label>
 </div>
 <div class="setting-row">
+  <span>📑</span>
+  <span id="sidebar-animation-label" class="status-label">Sidebar animatie aan</span>
+  <label class="switch">
+    <input type="checkbox" id="sidebar-animation-toggle">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="setting-row">
+  <span>🗂️</span>
+  <span id="compact-cards-label" class="status-label">Compacte kaarten uit</span>
+  <label class="switch">
+    <input type="checkbox" id="compact-cards-toggle">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="setting-row">
+  <span>⬆️</span>
+  <span id="scroll-top-label" class="status-label">Scroll knop aan</span>
+  <label class="switch">
+    <input type="checkbox" id="scroll-top-toggle">
+    <span class="slider"></span>
+  </label>
+</div>
+<div class="setting-row">
   <span>🎵 Aantal resultaten</span>
   <select id="song-limit">
     <option value="5">5</option>
@@ -296,6 +317,7 @@ const notFound = (container) => {
   <p>Sorry, de pagina die je zoekt bestaat niet.</p>
   <nav>
     <a href="#/">Terug naar home</a>
+  </nav>
   `;
 };
 
