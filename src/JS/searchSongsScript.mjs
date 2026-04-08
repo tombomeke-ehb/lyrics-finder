@@ -18,6 +18,8 @@ export function setupFindLyricsPage() {
   const yearFilter = document.getElementById('year-filter');
   const sortSelect = document.getElementById('sort-select');
   const resetFiltersBtn = document.getElementById('reset-filters');
+  const recentSearchesContainer = document.getElementById('recent-searches');
+  const resultsSummary = document.getElementById('results-summary');
   let searchError = document.getElementById('searchError');
 
   // Create error div if missing
@@ -34,6 +36,7 @@ export function setupFindLyricsPage() {
   
   // Track-cache (laatste 3 zoekopdrachten in localStorage)
   const TRACK_CACHE_KEY = 'trackCacheRecent3';
+  const RECENT_SEARCHES_KEY = 'recentSearches';
   const SAVED_SONGS_KEY = 'savedSongsV2';
 
   // Observer voor lazy loading images
@@ -84,6 +87,91 @@ export function setupFindLyricsPage() {
   function isSongSaved(artist, track) {
     const saved = loadSavedSongs();
     return saved.some(s => s.artistName === artist && s.trackName === track);
+  }
+
+  function loadRecentSearches() {
+    try {
+      return JSON.parse(localStorage.getItem(RECENT_SEARCHES_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveRecentSearches(searches) {
+    localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(searches));
+  }
+
+  function addRecentSearch(query) {
+    if (!query || query.length < 2) return;
+    const current = loadRecentSearches().filter(item => item.toLowerCase() !== query.toLowerCase());
+    current.unshift(query);
+    saveRecentSearches(current.slice(0, 6));
+    renderRecentSearches();
+  }
+
+  function renderRecentSearches() {
+    if (!recentSearchesContainer) return;
+    const searches = loadRecentSearches();
+
+    if (!searches.length) {
+      recentSearchesContainer.innerHTML = '';
+      return;
+    }
+
+    recentSearchesContainer.innerHTML = '';
+
+    const title = document.createElement('p');
+    title.className = 'recent-search-title';
+    title.textContent = 'Recente zoekopdrachten:';
+
+    const list = document.createElement('div');
+    list.className = 'recent-search-list';
+
+    searches.forEach(item => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'recent-search-chip';
+      chip.dataset.query = item;
+      chip.textContent = item;
+      list.appendChild(chip);
+    });
+
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.className = 'recent-search-clear';
+    clearButton.id = 'clearRecentSearches';
+    clearButton.textContent = 'Wissen';
+    list.appendChild(clearButton);
+
+    recentSearchesContainer.appendChild(title);
+    recentSearchesContainer.appendChild(list);
+    recentSearchesContainer.querySelectorAll('.recent-search-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        searchInput.value = chip.dataset.query || '';
+        searchSongs();
+      });
+    });
+
+    const clearRecentButton = document.getElementById('clearRecentSearches');
+    if (clearRecentButton) {
+      clearRecentButton.addEventListener('click', () => {
+        localStorage.removeItem(RECENT_SEARCHES_KEY);
+        renderRecentSearches();
+      });
+    }
+  }
+
+  function renderSkeletonState() {
+    if (!resultsDiv) return;
+    const placeholders = Array.from({ length: 6 }, () => `
+      <article class="result-div skeleton-card" aria-hidden="true">
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+      </article>
+    `).join('');
+    resultsDiv.innerHTML = `<div class="skeleton-grid">${placeholders}</div>`;
   }
 
   // Filter en sorteer functies
@@ -151,10 +239,12 @@ export function setupFindLyricsPage() {
     // Input validatie - alleen tonen bij initiële search, niet bij filter changes
     if (!query && !resultsDiv.innerHTML) {
       showError('Typ eerst iets in…', 'warning');
+      if (resultsSummary) resultsSummary.textContent = '';
       return;
     }
     if (query.length < 2 && !resultsDiv.innerHTML) {
       showError('Voer minimaal 2 tekens in.', 'info');
+      if (resultsSummary) resultsSummary.textContent = '';
       return;
     }
 
@@ -166,6 +256,7 @@ export function setupFindLyricsPage() {
       const cacheKey = `${query.toLowerCase()}|${songLimit}`;
       let trackCacheArr = loadTrackCache();
       let tracks = query ? getCachedTracks(trackCacheArr, cacheKey) : null;
+      if (query) addRecentSearch(query);
 
       if (!tracks && query) {
         const res = await safeFetch(
@@ -174,6 +265,13 @@ export function setupFindLyricsPage() {
         const data = await res.json();
         if (!data.results || !data.results.length) {
           showError('Geen resultaten gevonden.', 'info');
+          if (resultsSummary) resultsSummary.textContent = '0 resultaten gevonden';
+          resultsDiv.innerHTML = `
+            <div class="empty-state">
+              <h3>Geen liedjes gevonden</h3>
+              <p>Probeer een andere zoekterm of controleer je spelling.</p>
+            </div>
+          `;
           return;
         }
         tracks = data.results;
@@ -188,6 +286,23 @@ export function setupFindLyricsPage() {
 
       const filteredTracks = applyFilters(tracks);
       resultsDiv.innerHTML = '';
+
+      if (resultsSummary) {
+        const total = filteredTracks.length;
+        resultsSummary.textContent = total
+          ? `${total} resultaat${total === 1 ? '' : 'en'} gevonden`
+          : 'Geen resultaten voor je huidige filters';
+      }
+
+      if (!filteredTracks.length) {
+        resultsDiv.innerHTML = `
+          <div class="empty-state">
+            <h3>Geen liedjes gevonden</h3>
+            <p>Probeer een andere artiest, titel of pas de filters aan.</p>
+          </div>
+        `;
+        return;
+      }
       
       filteredTracks.forEach(track => {
         const trackElement = createTrackItem(track);
@@ -199,6 +314,13 @@ export function setupFindLyricsPage() {
           lazyLoadObserver.observe(img);
         }
       });
+
+      Array.from(resultsDiv.children).forEach((card, index) => {
+        card.style.setProperty('--stagger-index', String(index));
+        card.classList.add('result-enter');
+      });
+
+      enableSingleAudioPlayback(resultsDiv);
 
     } catch (err) {
       console.error('Search error:', err);
@@ -236,13 +358,31 @@ export function setupFindLyricsPage() {
     });
   }
 
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', resetFilters);
+  }
 
-resetFiltersBtn.addEventListener('click', resetFilters);
+  renderRecentSearches();
 
 
   // Loading functions
+  function enableSingleAudioPlayback(scope) {
+    const players = scope.querySelectorAll('audio.preview');
+    players.forEach((player) => {
+      player.addEventListener('play', () => {
+        players.forEach((other) => {
+          if (other !== player) {
+            other.pause();
+            other.currentTime = 0;
+          }
+        });
+      });
+    });
+  }
+
   function showLoading() {
     const loadingOverlay = document.getElementById('loadingOverlay');
+    renderSkeletonState();
     if (loadingOverlay) loadingOverlay.style.display = 'flex';
   }
 
@@ -270,7 +410,7 @@ resetFiltersBtn.addEventListener('click', resetFilters);
             <p><strong>Releasedatum:</strong> ${rd}</p>
           </div>
         </div>
-        ${previewUrl ? `<audio class="preview" controls src="${previewUrl}"></audio>` : ''}
+        ${previewUrl ? `<div class="preview-shell"><audio class="preview" controls src="${previewUrl}"></audio></div>` : ''}
         <button class="toon-lyrics">Toon lyrics</button>
         <button class="save-song">${saved ? 'Niet meer opslaan' : 'Opslaan'}</button>
         <div class="lyrics-overlay" style="display:none;">
@@ -297,23 +437,21 @@ resetFiltersBtn.addEventListener('click', resetFilters);
     if (btn && lyricsOverlay) {
       btn.addEventListener('click', async () => {
         const key = `${artistName}|${trackName}`;
-        if (window.matchMedia("(min-width: 600px)").matches) {
-          lyricsOverlay.style.display = 'flex';
-          btn.disabled = true;
-          if (lyricsCache[key]) {
+        lyricsOverlay.style.display = 'flex';
+        lyricsOverlay.classList.add('active');
+        btn.disabled = true;
+        if (lyricsCache[key]) {
+          lyricsContent.textContent = lyricsCache[key];
+        } else {
+          try {
+            const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
+            const d = await r.json();
+            lyricsCache[key] = d.lyrics || 'Lyrics niet gevonden.';
             lyricsContent.textContent = lyricsCache[key];
-          } else {
-            try {
-              const r = await safeFetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`);
-              const d = await r.json();
-              lyricsCache[key] = d.lyrics || 'Lyrics niet gevonden.';
-              lyricsContent.textContent = lyricsCache[key];
-            } catch (e) {
-              lyricsContent.textContent = 'Fout bij laden lyrics.';
-              error.error = e;
-              console.error('Error fetching lyrics:', e);
-              showError('Fout bij laden lyrics.', error);
-            }
+          } catch (e) {
+            lyricsContent.textContent = 'Fout bij laden lyrics.';
+            console.error('Error fetching lyrics:', e);
+            showError('Fout bij laden lyrics.', 'error');
           }
         }
       });
@@ -321,8 +459,17 @@ resetFiltersBtn.addEventListener('click', resetFilters);
 // Close lyrics overlay
     if (closeBtn && lyricsOverlay) {
       closeBtn.addEventListener('click', () => {
+        lyricsOverlay.classList.remove('active');
         lyricsOverlay.style.display = 'none';
         if (btn) btn.disabled = false;
+      });
+
+      lyricsOverlay.addEventListener('click', (event) => {
+        if (event.target === lyricsOverlay) {
+          lyricsOverlay.classList.remove('active');
+          lyricsOverlay.style.display = 'none';
+          if (btn) btn.disabled = false;
+        }
       });
     }
 

@@ -50,6 +50,20 @@ function sortTracks(tracks, sortKey) {
   });
 }
 
+function enableSingleAudioPlayback(scope) {
+  const players = scope.querySelectorAll('audio.preview');
+  players.forEach((player) => {
+    player.addEventListener('play', () => {
+      players.forEach((other) => {
+        if (other !== player) {
+          other.pause();
+          other.currentTime = 0;
+        }
+      });
+    });
+  });
+}
+
 function createSavedSongItem(song, removeCallback) {
   const {
     artworkUrl100,
@@ -77,7 +91,7 @@ function createSavedSongItem(song, removeCallback) {
           <p><strong>Releasedatum:</strong> ${rd}</p>
         </div>
       </div>
-      ${previewUrl ? `<audio class="preview" controls src="${previewUrl}"></audio>` : ''}
+      ${previewUrl ? `<div class="preview-shell"><audio class="preview" controls src="${previewUrl}"></audio></div>` : ''}
       <button class="toon-lyrics">Toon lyrics</button>
       <button class="save-song">Niet meer opslaan</button>
       <div class="lyrics-overlay" style="display:none;">
@@ -93,14 +107,17 @@ function createSavedSongItem(song, removeCallback) {
   const closeBtn = div.querySelector('.close-lyrics');
   btn.addEventListener('click', () => {
     lyricsOverlay.style.display = 'flex';
+    lyricsOverlay.classList.add('active');
     btn.disabled = true;
   });
   closeBtn.addEventListener('click', () => {
+    lyricsOverlay.classList.remove('active');
     lyricsOverlay.style.display = 'none';
     btn.disabled = false;
   });
   lyricsOverlay.addEventListener('click', (e) => {
     if (e.target === lyricsOverlay) {
+      lyricsOverlay.classList.remove('active');
       lyricsOverlay.style.display = 'none';
       btn.disabled = false;
     }
@@ -121,8 +138,15 @@ export function setupSavedSongsPage() {
   applySettingsFromStorage();
 
   const container = document.getElementById('input-container');
+  const savedResultsSummary = document.getElementById('saved-results-summary');
   if (!container) return;
-  container.innerHTML = '';
+  let resultsDiv = container.querySelector('#results');
+  if (!resultsDiv) {
+    resultsDiv = document.createElement('div');
+    resultsDiv.id = 'results';
+    resultsDiv.className = 'results';
+    container.appendChild(resultsDiv);
+  }
 
   // Filter elementen ophalen
   const genreFilter = document.getElementById('genre-filter');
@@ -132,7 +156,8 @@ export function setupSavedSongsPage() {
   function renderSavedSongs() {
     const songs = loadSavedSongs();
     if (!songs.length) {
-      container.innerHTML = '<p class="no-saved-songs">Je hebt nog geen liedjes opgeslagen.</p>';
+      if (savedResultsSummary) savedResultsSummary.textContent = '0 opgeslagen liedjes';
+      resultsDiv.innerHTML = '<p class="no-saved-songs">Je hebt nog geen liedjes opgeslagen.</p>';
       return;
     }
 
@@ -146,18 +171,16 @@ export function setupSavedSongsPage() {
     filtered = sortTracks(filtered, sortValue);
 
     // Results wrapper
-    let resultsDiv = container.querySelector('#results');
-    if (!resultsDiv) {
-      resultsDiv = document.createElement('div');
-      resultsDiv.id = 'results';
-      resultsDiv.className = 'results';
-      container.appendChild(resultsDiv);
-    }
     resultsDiv.innerHTML = '';
 
     if (!filtered.length) {
+      if (savedResultsSummary) savedResultsSummary.textContent = 'Geen matches met deze filters';
       resultsDiv.innerHTML = '<p class="no-saved-songs">Geen liedjes gevonden met deze filters.</p>';
       return;
+    }
+
+    if (savedResultsSummary) {
+      savedResultsSummary.textContent = `${filtered.length} opgeslagen liedje${filtered.length === 1 ? '' : 's'} zichtbaar`;
     }
 
     filtered.forEach(song => {
@@ -166,14 +189,12 @@ export function setupSavedSongsPage() {
         savedSongs = savedSongs.filter(s => !(s.artistName === songToRemove.artistName && s.trackName === songToRemove.trackName));
         saveSavedSongs(savedSongs);
         el.remove();
-        if (!loadSavedSongs().length) {
-          container.innerHTML = '<p class="no-saved-songs">Je hebt nog geen liedjes opgeslagen.</p>';
-        } else {
-          renderSavedSongs(); // opnieuw filteren/sorteren na verwijderen
-        }
+        renderSavedSongs();
       });
       resultsDiv.appendChild(songDiv);
     });
+
+    enableSingleAudioPlayback(resultsDiv);
   }
 
   // Event listeners voor filters
