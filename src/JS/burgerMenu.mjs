@@ -40,8 +40,8 @@ export function burgerMenu() {
 
     const openMenu = () => {
         lastFocusedElement = document.activeElement;
-        burgerNav.inert = false;
         burgerNav.classList.add('active');
+        burgerNav.inert = false;
         menuContainer.classList.add('open');
         newBurgerIcon.classList.add('menu-open');
         document.body.classList.add('menu-open');
