@@ -118,16 +118,33 @@ export function setupFindLyricsPage() {
       return;
     }
 
-    recentSearchesContainer.innerHTML = `
-      <p class="recent-search-title">Recente zoekopdrachten:</p>
-      <div class="recent-search-list">
-        ${searches
-          .map(item => `<button type="button" class="recent-search-chip" data-query="${item.replace(/"/g, '&quot;')}">${item}</button>`)
-          .join('')}
-        <button type="button" class="recent-search-clear" id="clearRecentSearches">Wissen</button>
-      </div>
-    `;
+    recentSearchesContainer.innerHTML = '';
 
+    const title = document.createElement('p');
+    title.className = 'recent-search-title';
+    title.textContent = 'Recente zoekopdrachten:';
+
+    const list = document.createElement('div');
+    list.className = 'recent-search-list';
+
+    searches.forEach(item => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'recent-search-chip';
+      chip.dataset.query = item;
+      chip.textContent = item;
+      list.appendChild(chip);
+    });
+
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.className = 'recent-search-clear';
+    clearButton.id = 'clearRecentSearches';
+    clearButton.textContent = 'Wissen';
+    list.appendChild(clearButton);
+
+    recentSearchesContainer.appendChild(title);
+    recentSearchesContainer.appendChild(list);
     recentSearchesContainer.querySelectorAll('.recent-search-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         searchInput.value = chip.dataset.query || '';
