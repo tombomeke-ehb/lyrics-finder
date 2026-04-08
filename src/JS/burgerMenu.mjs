@@ -31,6 +31,8 @@ export function burgerMenu() {
         newBurgerIcon.classList.remove('menu-open');
         document.body.classList.remove('menu-open');
         newBurgerIcon.setAttribute('aria-expanded', 'false');
+        burgerNav.setAttribute('aria-hidden', 'true');
+        burgerNav.inert = true;
         if (lastFocusedElement) {
             lastFocusedElement.focus();
         }
@@ -38,11 +40,13 @@ export function burgerMenu() {
 
     const openMenu = () => {
         lastFocusedElement = document.activeElement;
+        burgerNav.inert = false;
         burgerNav.classList.add('active');
         menuContainer.classList.add('open');
         newBurgerIcon.classList.add('menu-open');
         document.body.classList.add('menu-open');
         newBurgerIcon.setAttribute('aria-expanded', 'true');
+        burgerNav.setAttribute('aria-hidden', 'false');
         requestAnimationFrame(() => {
             burgerNav.classList.add('menu-entered');
             const focusable = getFocusable();
@@ -55,15 +59,14 @@ export function burgerMenu() {
     newBurgerIcon.setAttribute('aria-expanded', 'false');
     newBurgerIcon.setAttribute('aria-controls', 'burgerNav');
     burgerNav.setAttribute('aria-hidden', 'true');
+    burgerNav.inert = true;
 
     newBurgerIcon.addEventListener('click', () => {
         openMenu();
-        burgerNav.setAttribute('aria-hidden', 'false');
     });
 
     newCloseIcon.addEventListener('click', () => {
         closeMenu();
-        burgerNav.setAttribute('aria-hidden', 'true');
     });
 
     const navigateFromMenuLink = (event, link) => {
@@ -73,7 +76,6 @@ export function burgerMenu() {
         if (targetHash) {
             window.location.hash = targetHash;
         }
-        burgerNav.setAttribute('aria-hidden', 'true');
         setTimeout(() => {
             closeMenu();
         }, 0);
@@ -106,7 +108,6 @@ export function burgerMenu() {
         const swipeDistance = touchCurrentX - touchStartX;
         if (swipeDistance > 70) {
             closeMenu();
-            burgerNav.setAttribute('aria-hidden', 'true');
         }
     });
 
@@ -125,7 +126,6 @@ export function burgerMenu() {
         event.preventDefault();
         event.stopPropagation();
         closeMenu();
-        burgerNav.setAttribute('aria-hidden', 'true');
     };
 
     window.__lyricsFinderOutsideClickHandler = outsideClickHandler;
@@ -138,7 +138,6 @@ export function burgerMenu() {
     const escHandler = (event) => {
         if (event.key === 'Escape' && burgerNav.classList.contains('active')) {
             closeMenu();
-            burgerNav.setAttribute('aria-hidden', 'true');
             return;
         }
 
