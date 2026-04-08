@@ -122,6 +122,8 @@ export function burgerMenu() {
             return;
         }
 
+        event.preventDefault();
+        event.stopPropagation();
         closeMenu();
         burgerNav.setAttribute('aria-hidden', 'true');
     };
